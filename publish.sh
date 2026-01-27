@@ -13,13 +13,14 @@ restore() {
 }
 trap restore EXIT
 
-node -e "
-const pkg = require('./package.json.bak');
+node --input-type=module -e "
+import { readFileSync, writeFileSync } from 'fs';
+const pkg = JSON.parse(readFileSync('package.json.bak', 'utf8'));
 const publish = {};
 for (const key of ['name','version','private','main','module','types','exports','files','license']) {
   if (key in pkg) publish[key] = pkg[key];
 }
-require('fs').writeFileSync('package.json', JSON.stringify(publish, null, 2) + '\n');
+writeFileSync('package.json', JSON.stringify(publish, null, 2) + '\n');
 "
 
 npm publish
