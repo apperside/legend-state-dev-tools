@@ -1,6 +1,6 @@
 {
   "name": "legend-state-dev-tools",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "private": false,
   "workspaces": [
     "packages/*",
