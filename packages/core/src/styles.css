@@ -1,0 +1,184 @@
+/* Legend State Dev Tools Styles */
+
+/* Toolbar */
+#lsdt-toolbar {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 10px 14px;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 14px;
+  z-index: 999999;
+  cursor: move;
+  user-select: none;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.2s ease;
+}
+
+#lsdt-toolbar.dragging {
+  opacity: 0.8;
+  cursor: grabbing;
+}
+
+.lsdt-toolbar-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.lsdt-toolbar-title {
+  font-weight: 600;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+}
+
+.lsdt-toolbar-indicator {
+  width: 8px;
+  height: 8px;
+  background: #4ade80;
+  border-radius: 50%;
+  box-shadow: 0 0 6px rgba(74, 222, 128, 0.6);
+  flex-shrink: 0;
+}
+
+.lsdt-toggle-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  color: white;
+  padding: 5px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 500;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+
+.lsdt-toggle-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-1px);
+}
+
+.lsdt-toggle-btn.active {
+  background: rgba(255, 255, 255, 0.4);
+  border-color: rgba(255, 255, 255, 0.5);
+}
+
+/* Panel */
+#lsdt-panel {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  width: 420px;
+  max-height: calc(100vh - 100px);
+  background: #1e1e2e;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  z-index: 999999;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+#lsdt-panel.lsdt-panel-left {
+  right: auto;
+  left: 20px;
+}
+
+.lsdt-panel-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 14px 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.lsdt-panel-header h3 {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.lsdt-panel-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.lsdt-readonly-badge {
+  font-size: 10px;
+  background: rgba(255, 255, 255, 0.2);
+  padding: 2px 8px;
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.lsdt-close-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 16px;
+  transition: background 0.2s;
+}
+
+.lsdt-close-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.lsdt-panel-content {
+  padding: 0;
+  overflow-y: auto;
+  flex: 1;
+  min-height: 200px;
+  max-height: calc(100vh - 180px);
+}
+
+/* json-edit-react overrides for dark panel */
+#lsdt-json-editor-root {
+  font-size: 13px;
+}
+
+#lsdt-json-editor-root > div {
+  border-radius: 0 !important;
+  border: none !important;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  #lsdt-toolbar {
+    bottom: 10px;
+    right: 10px;
+    font-size: 12px;
+  }
+
+  #lsdt-panel {
+    width: calc(100vw - 20px);
+    right: 10px;
+    top: 10px;
+    max-height: calc(100vh - 80px);
+  }
+
+  #lsdt-panel.lsdt-panel-left {
+    left: 10px;
+  }
+}

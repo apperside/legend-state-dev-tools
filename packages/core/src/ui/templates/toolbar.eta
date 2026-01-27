@@ -1,0 +1,13 @@
+<div class="lsdt-toolbar-header">
+  <div class="lsdt-toolbar-title">
+    <span class="lsdt-toolbar-indicator"></span>
+    Legend State
+  </div>
+  <button
+    class="lsdt-toggle-btn <%= it.panelVisible ? 'active' : '' %>"
+    data-action="toggle-panel"
+    title="<%= it.panelVisible ? 'Hide panel' : 'Show panel' %>"
+  >
+    <%= it.panelVisible ? 'Hide' : 'Show' %> <%= it.rootName %>
+  </button>
+</div>

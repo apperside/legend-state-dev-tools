@@ -1,0 +1,12 @@
+<div class="lsdt-panel-header">
+  <h3><%= it.rootName %></h3>
+  <div class="lsdt-panel-actions">
+    <% if (it.readOnly) { %>
+      <span class="lsdt-readonly-badge">Read-only</span>
+    <% } %>
+    <button class="lsdt-close-btn" data-action="close-panel" title="Close">&times;</button>
+  </div>
+</div>
+<div class="lsdt-panel-content">
+  <div id="lsdt-json-editor-root"></div>
+</div>
