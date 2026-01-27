@@ -112,6 +112,7 @@ export function init(
   // Create state bridge
   bridge = createStateBridge(observable$, {
     onSnapshot: (snapshot) => {
+      if (panel?.getIsDragging()) return;
       editorBridge?.updateData(snapshot);
     },
   });

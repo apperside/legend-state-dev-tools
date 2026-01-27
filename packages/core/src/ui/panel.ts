@@ -75,6 +75,10 @@ export class Panel {
     return this.visible;
   }
 
+  public getIsDragging(): boolean {
+    return this.isDragging;
+  }
+
   public getEditorRoot(): HTMLElement | null {
     return this.container?.querySelector('#lsdt-json-editor-root') || null;
   }

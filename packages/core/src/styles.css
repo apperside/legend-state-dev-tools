@@ -140,6 +140,13 @@
 
 #lsdt-panel.lsdt-dragging {
   will-change: transform;
+  contain: layout style size;
+}
+
+#lsdt-panel.lsdt-dragging .lsdt-panel-content {
+  pointer-events: none;
+  visibility: hidden;
+  content-visibility: hidden;
 }
 
 #lsdt-panel.lsdt-resizing {

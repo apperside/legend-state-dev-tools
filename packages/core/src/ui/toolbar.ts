@@ -48,8 +48,6 @@ export class Toolbar {
 
     this.container.addEventListener('click', this.handleClick);
     this.container.addEventListener('mousedown', this.handleMouseDown);
-    document.addEventListener('mousemove', this.handleMouseMove);
-    document.addEventListener('mouseup', this.handleMouseUp);
   }
 
   private handleClick = (e: Event): void => {
@@ -74,6 +72,8 @@ export class Toolbar {
       this.offsetX = e.clientX - rect.left;
       this.offsetY = e.clientY - rect.top;
     }
+    document.addEventListener('mousemove', this.handleMouseMove);
+    document.addEventListener('mouseup', this.handleMouseUp);
   };
 
   private handleMouseMove = (e: MouseEvent): void => {
@@ -88,6 +88,8 @@ export class Toolbar {
   private handleMouseUp = (): void => {
     this.isDragging = false;
     this.container?.classList.remove('dragging');
+    document.removeEventListener('mousemove', this.handleMouseMove);
+    document.removeEventListener('mouseup', this.handleMouseUp);
   };
 
   public setPanelVisible(visible: boolean): void {
