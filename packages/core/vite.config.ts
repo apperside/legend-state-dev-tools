@@ -45,8 +45,6 @@ export default defineConfig({
         'react-dom',
         'react-dom/client',
         'react/jsx-runtime',
-        'eta',
-        'json-edit-react',
         '@legendapp/state',
       ],
       output: {
@@ -54,8 +52,6 @@ export default defineConfig({
           react: 'React',
           'react-dom': 'ReactDOM',
           'react-dom/client': 'ReactDOMClient',
-          eta: 'Eta',
-          'json-edit-react': 'JsonEditReact',
           '@legendapp/state': 'LegendState',
         },
       },
