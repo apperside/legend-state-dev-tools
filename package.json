@@ -6,6 +6,21 @@
     "packages/*",
     "examples/*"
   ],
+  "main": "./packages/core/dist/index.js",
+  "module": "./packages/core/dist/index.mjs",
+  "types": "./packages/core/dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./packages/core/dist/index.d.ts",
+      "import": "./packages/core/dist/index.mjs",
+      "require": "./packages/core/dist/index.js",
+      "default": "./packages/core/dist/index.mjs"
+    },
+    "./packages/core/dist/styles.css": "./packages/core/dist/styles.css"
+  },
+  "files": [
+    "packages/core/dist"
+  ],
   "scripts": {
     "build": "npm run build -w packages/core",
     "dev": "npm run build && npm run dev -w examples/basic",
