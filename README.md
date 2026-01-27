@@ -1,6 +1,8 @@
 # legend-state-dev-tools
 
 > **Early-stage project** -- I discovered Legend State recently and chose it for a project I was working on. It had everything I needed from a state manager, but I couldn't live without dev tools, so I built this. It appears to work, but it hasn't been thoroughly tested yet -- consider it a proof of concept for now.
+>
+> **Legend State v3 only** -- This tool was built specifically for Legend State v3 and does not work with older versions (v1/v2).
 
 [![npm version](https://img.shields.io/npm/v/legend-state-dev-tools)](https://www.npmjs.com/package/legend-state-dev-tools)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
