@@ -12,6 +12,8 @@ export class Panel {
   private isDragging = false;
   private dragOffsetX = 0;
   private dragOffsetY = 0;
+  private dragStartLeft = 0;
+  private dragStartTop = 0;
 
   constructor(options: {
     rootName?: string;
@@ -177,6 +179,8 @@ export class Panel {
     const rect = this.container.getBoundingClientRect();
     this.dragOffsetX = e.clientX - rect.left;
     this.dragOffsetY = e.clientY - rect.top;
+    this.dragStartLeft = rect.left;
+    this.dragStartTop = rect.top;
 
     this.container.classList.add('lsdt-dragging');
     document.addEventListener('mousemove', this.handleDragMove);
@@ -186,19 +190,24 @@ export class Panel {
   private handleDragMove = (e: MouseEvent): void => {
     if (!this.isDragging || !this.container) return;
 
-    const left = e.clientX - this.dragOffsetX;
-    const top = e.clientY - this.dragOffsetY;
+    const dx = e.clientX - this.dragOffsetX - this.dragStartLeft;
+    const dy = e.clientY - this.dragOffsetY - this.dragStartTop;
 
-    this.container.style.left = `${left}px`;
-    this.container.style.top = `${top}px`;
-    this.container.style.right = 'auto';
-    this.container.style.bottom = 'auto';
+    this.container.style.transform = `translate(${dx}px, ${dy}px)`;
   };
 
   private handleDragEnd = (): void => {
     if (!this.isDragging || !this.container) return;
 
     this.isDragging = false;
+
+    const rect = this.container.getBoundingClientRect();
+    this.container.style.left = `${rect.left}px`;
+    this.container.style.top = `${rect.top}px`;
+    this.container.style.right = 'auto';
+    this.container.style.bottom = 'auto';
+    this.container.style.transform = '';
+
     this.container.classList.remove('lsdt-dragging');
     document.removeEventListener('mousemove', this.handleDragMove);
     document.removeEventListener('mouseup', this.handleDragEnd);

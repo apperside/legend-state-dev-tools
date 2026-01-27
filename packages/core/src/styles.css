@@ -138,6 +138,14 @@
   user-select: none;
 }
 
+#lsdt-panel.lsdt-dragging {
+  will-change: transform;
+}
+
+#lsdt-panel.lsdt-resizing {
+  will-change: width;
+}
+
 #lsdt-panel.lsdt-dragging .lsdt-panel-header {
   cursor: grabbing;
 }
