@@ -1,5 +1,5 @@
 {
-  "name": "legend-state-dev-tools",
+  "name": "legend-state-dev-tools-monorepo",
   "version": "0.0.2",
   "private": false,
   "workspaces": [
