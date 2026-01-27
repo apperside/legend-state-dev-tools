@@ -78,7 +78,10 @@
   position: fixed;
   top: 20px;
   right: 20px;
-  width: 420px;
+  width: var(--lsdt-panel-width, 420px);
+  min-width: 280px;
+  max-width: 90vw;
+  min-height: 300px;
   max-height: calc(100vh - 100px);
   background: #1e1e2e;
   border-radius: 12px;
@@ -91,9 +94,52 @@
   border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
+.lsdt-resize-handle {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 6px;
+  height: 100%;
+  cursor: col-resize;
+  z-index: 10;
+}
+
+#lsdt-panel.lsdt-panel-left .lsdt-resize-handle {
+  left: auto;
+  right: 0;
+}
+
+.lsdt-resize-handle::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 1px;
+  transform: translateY(-50%);
+  width: 3px;
+  height: 32px;
+  border-left: 1px solid rgba(255, 255, 255, 0.15);
+  border-right: 1px solid rgba(255, 255, 255, 0.15);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.lsdt-resize-handle:hover::after,
+#lsdt-panel.lsdt-resizing .lsdt-resize-handle::after {
+  opacity: 1;
+}
+
 #lsdt-panel.lsdt-panel-left {
   right: auto;
   left: 20px;
+}
+
+#lsdt-panel.lsdt-dragging,
+#lsdt-panel.lsdt-resizing {
+  user-select: none;
+}
+
+#lsdt-panel.lsdt-dragging .lsdt-panel-header {
+  cursor: grabbing;
 }
 
 .lsdt-panel-header {
@@ -104,6 +150,7 @@
   justify-content: space-between;
   align-items: center;
   flex-shrink: 0;
+  cursor: grab;
 }
 
 .lsdt-panel-header h3 {
