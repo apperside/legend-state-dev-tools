@@ -9,6 +9,8 @@
 
 Visual dev tools for Legend State v3 -- inspect and edit observable state in real time.
 
+[**Live Demo →**](https://apperside.github.io/legend-state-dev-tools/)
+
 <!-- screenshot -->
 
 ## Features
