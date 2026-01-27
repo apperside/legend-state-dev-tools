@@ -1,6 +1,6 @@
 {
   "name": "legend-state-dev-tools",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Dev tools for Legend State v3 - view and edit observable state",
   "main": "./dist/index.js",
   "module": "./dist/index.mjs",
