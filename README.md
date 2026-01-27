@@ -46,7 +46,7 @@ yarn add legend-state-dev-tools
 ```ts
 import { observable } from '@legendapp/state';
 import { init } from 'legend-state-dev-tools';
-import 'legend-state-dev-tools/dist/style.css';
+import 'legend-state-dev-tools/dist/styles.css';
 
 const state$ = observable({ count: 0, user: { name: 'Alice' } });
 
