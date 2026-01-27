@@ -251,12 +251,19 @@ export const App = observer(function App() {
       <div
         style={{
           textAlign: 'center',
-          padding: '24px',
-          color: COLORS.textMuted,
+          padding: '16px 24px',
+          margin: '0 24px 24px',
+          background: 'rgba(250, 204, 21, 0.12)',
+          border: '1px solid rgba(250, 204, 21, 0.3)',
+          borderRadius: 12,
+          color: '#fde68a',
           fontSize: 14,
+          maxWidth: 960,
+          marginLeft: 'auto',
+          marginRight: 'auto',
         }}
       >
-        💡 Open the dev tools panel using the floating button at the bottom-right corner
+        💡 Open the dev tools panel using the floating button at the bottom-right corner. The panel is draggable (grab the header) and resizable (drag the left edge).
       </div>
     </div>
   );
