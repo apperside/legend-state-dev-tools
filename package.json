@@ -1,7 +1,7 @@
 {
-  "name": "legend-state-dev-tools-monorepo",
-  "version": "0.1.0",
-  "private": true,
+  "name": "legend-state-dev-tools",
+  "version": "0.0.1",
+  "private": false,
   "workspaces": [
     "packages/*",
     "examples/*"
