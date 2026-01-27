@@ -11,6 +11,7 @@ export interface DevToolsOptions {
   theme?: string;
   rootName?: string;
   position?: 'left' | 'right';
+  defaultOpen?: boolean;
 }
 
 export interface DevTools {
@@ -27,6 +28,7 @@ export function init(
     theme = 'githubDark',
     rootName = 'state$',
     position = 'right',
+    defaultOpen = false,
   } = options;
 
   if (!enabled) {
@@ -121,6 +123,10 @@ export function init(
     }
   });
   cleanup.add(() => panel?.unmount());
+
+  if (defaultOpen) {
+    showPanel();
+  }
 
   return {
     destroy: () => {

@@ -10,6 +10,7 @@ init(state$, {
   rootName: 'state$',
   theme: 'githubDark',
   readOnly: false,
+  defaultOpen: true,
 });
 
 const root = createRoot(document.getElementById('root')!);
