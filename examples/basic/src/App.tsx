@@ -74,7 +74,7 @@ export const App = observer(function App() {
           A powerful state inspector for Legend State v3
         </p>
         <a
-          href="https://github.com/simonecervini/legend-state-dev-tools"
+          href="https://github.com/apperside/legend-state-dev-tools"
           target="_blank"
           rel="noopener noreferrer"
           style={{ ...pillBtn('rgba(255,255,255,0.2)'), textDecoration: 'none', backdropFilter: 'blur(8px)' }}
