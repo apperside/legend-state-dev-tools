@@ -188,6 +188,24 @@
   font-weight: 500;
 }
 
+.lsdt-dump-btn {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.lsdt-dump-btn:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
 .lsdt-close-btn {
   background: rgba(255, 255, 255, 0.2);
   border: none;
@@ -205,6 +223,23 @@
 
 .lsdt-close-btn:hover {
   background: rgba(255, 255, 255, 0.3);
+}
+
+.lsdt-node-dump-btn {
+  opacity: 0;
+  cursor: pointer;
+  color: #888;
+  transition: opacity 0.15s, color 0.15s;
+  vertical-align: middle;
+}
+
+.lsdt-node-dump-btn:hover {
+  color: #ccc;
+}
+
+#lsdt-json-editor-root [class*="row"]:hover .lsdt-node-dump-btn,
+#lsdt-json-editor-root div:hover > .lsdt-node-dump-btn {
+  opacity: 1;
 }
 
 .lsdt-panel-content {

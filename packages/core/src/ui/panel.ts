@@ -7,6 +7,7 @@ export class Panel {
   private rootName: string;
   private readOnly: boolean;
   private onClose?: () => void;
+  private onDumpState?: () => void;
   private position: 'left' | 'right';
   private resizeHandle: HTMLElement | null = null;
   private isDragging = false;
@@ -19,11 +20,13 @@ export class Panel {
     rootName?: string;
     readOnly?: boolean;
     onClose?: () => void;
+    onDumpState?: () => void;
     position?: 'left' | 'right';
   } = {}) {
     this.rootName = options.rootName || 'state$';
     this.readOnly = options.readOnly || false;
     this.onClose = options.onClose;
+    this.onDumpState = options.onDumpState;
     this.position = options.position || 'right';
   }
 
@@ -113,6 +116,8 @@ export class Panel {
     const action = actionElement.getAttribute('data-action');
     if (action === 'close-panel') {
       this.onClose?.();
+    } else if (action === 'dump-state') {
+      this.onDumpState?.();
     }
   };
 

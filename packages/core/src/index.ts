@@ -4,6 +4,7 @@ import { Panel } from './ui/panel';
 import { createStateBridge, type StateBridge } from './state-bridge';
 import { mountJsonEditor, type JsonEditorBridge } from './ui/json-editor-mount';
 import { createCleanup } from './ui/shared-utils';
+import { downloadJson, buildDumpFilename } from './ui/dump-utils';
 
 export interface DevToolsOptions {
   enabled?: boolean;
@@ -48,6 +49,12 @@ export function init(
     position,
     onClose: () => {
       hidePanel();
+    },
+    onDumpState: () => {
+      const snapshot = bridge?.getSnapshot();
+      if (snapshot !== undefined) {
+        downloadJson(snapshot, buildDumpFilename(rootName));
+      }
     },
   });
 

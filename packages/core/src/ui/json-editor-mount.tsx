@@ -1,6 +1,7 @@
 import React, { Component, useEffect, useState, type ErrorInfo, type ReactNode } from 'react';
 import { createRoot, type Root } from 'react-dom/client';
-import { JsonEditor, githubDarkTheme, githubLightTheme, monoDarkTheme, monoLightTheme } from 'json-edit-react';
+import { JsonEditor, githubDarkTheme, githubLightTheme, monoDarkTheme, monoLightTheme, type NodeData, type JsonEditorProps } from 'json-edit-react';
+import { downloadJson, buildDumpFilename } from './dump-utils';
 
 const themeMap: Record<string, object> = {
   githubDark: githubDarkTheme,
@@ -32,6 +33,29 @@ class ErrorBoundary extends Component<
   }
 }
 
+type CustomButtonDefinition = NonNullable<JsonEditorProps['customButtons']>[number];
+
+function DumpNodeButton() {
+  return (
+    <svg
+      className="lsdt-node-dump-btn"
+      xmlns="http://www.w3.org/2000/svg"
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    >
+      <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" />
+      <polyline points="7 10 12 15 17 10" />
+      <line x1="12" y1="15" x2="12" y2="3" />
+    </svg>
+  );
+}
+
 interface JsonEditorWrapperProps {
   data: unknown;
   onEdit: (newData: unknown) => void;
@@ -48,6 +72,15 @@ function JsonEditorWrapper({
   rootName,
 }: JsonEditorWrapperProps) {
   const resolvedTheme = themeMap[theme] ?? githubDarkTheme;
+
+  const dumpNodeButton: CustomButtonDefinition = {
+    Element: DumpNodeButton,
+    onClick: (nodeData: NodeData) => {
+      const pathParts = nodeData.path.map(String);
+      downloadJson(nodeData.value, buildDumpFilename(rootName, pathParts));
+    },
+  };
+
   return (
     <JsonEditor
       data={data as Record<string, unknown>}
@@ -59,6 +92,7 @@ function JsonEditorWrapper({
       restrictDelete={readOnly}
       restrictAdd={readOnly}
       restrictTypeSelection={readOnly ? true : undefined}
+      customButtons={[dumpNodeButton]}
     />
   );
 }
