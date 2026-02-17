@@ -1,52 +1,44 @@
 # legend-state-dev-tools
 
-> **Early-stage project** -- I discovered Legend State recently and chose it for a project I was working on. It had everything I needed from a state manager, but I couldn't live without dev tools, so I built this. I didn't put so much effort in it and it is far to be considered production ready, but it's a dev tool in the end 😉 
-It appears to work, tried id with datasets larger then the one in the demo, but it hasn't been thoroughly tested yet -- consider it a proof of concept for now.
->
-> **Legend State v3 only** -- This tool was built specifically for Legend State v3 and does not work with older versions (v1/v2).
-
 [![npm version](https://img.shields.io/npm/v/legend-state-dev-tools)](https://www.npmjs.com/package/legend-state-dev-tools)
 [![license](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
+[![GitHub stars](https://img.shields.io/github/stars/apperside/legend-state-dev-tools)](https://github.com/apperside/legend-state-dev-tools)
 
-Visual dev tools for Legend State v3 -- inspect and edit observable state in real time.
+**Visual dev tools for [Legend State](https://legendapp.com/open-source/state/v3/) v3** — inspect, edit, and export observable state in real time.
 
-[**Live Demo →**](https://apperside.github.io/legend-state-dev-tools/)
+[**Live Demo**](https://apperside.github.io/legend-state-dev-tools/)
 
 ![Demo](./demo.gif)
 
+> **Alpha** — A personal tool I built for my own projects. It works well for my use cases, but it hasn't been battle-tested in production. Built for Legend State v3 only (not compatible with v1/v2). Contributions and feedback are welcome.
+
+---
+
 ## Features
 
-- Real-time state tree view powered by `json-edit-react`
-- Inline editing of observable values
-- Multiple color themes (dark and light variants)
-- Draggable toolbar
-- Configurable panel positioning (left or right)
-- Read-only mode
-- Clean teardown via `destroy()`
+### Inspect
 
-## Installation
+Browse your entire observable state as a collapsible tree. Every node updates in real time as state changes — no polling, no manual refresh.
+
+### Edit
+
+Click any value to edit it inline. Changes sync back to the underlying observable instantly, so your app reacts immediately.
+
+### Real-time Updates
+
+The dev tools subscribe directly to your observables. Every mutation — from any source — appears in the tree the moment it happens.
+
+### Export
+
+Download the full state tree (or any subtree) as JSON. Useful for debugging, bug reports, or snapshotting state at a specific point in time.
+
+---
+
+## Quick Start
 
 ```bash
 npm install legend-state-dev-tools
 ```
-
-```bash
-pnpm add legend-state-dev-tools
-```
-
-```bash
-yarn add legend-state-dev-tools
-```
-
-### Peer dependencies
-
-| Package | Version |
-|---------|---------|
-| `@legendapp/state` | `>= 3.0.0-beta.0` |
-| `react` | `>= 18.0.0` |
-| `react-dom` | `>= 18.0.0` |
-
-## Quick Start
 
 ```ts
 import { observable } from '@legendapp/state';
@@ -60,6 +52,16 @@ const devtools = init(state$);
 // Later, to clean up:
 // devtools.destroy();
 ```
+
+### Peer Dependencies
+
+| Package | Version |
+|---------|---------|
+| `@legendapp/state` | `>= 3.0.0-beta.0` |
+| `react` | `>= 18.0.0` |
+| `react-dom` | `>= 18.0.0` |
+
+---
 
 ## API Reference
 
@@ -92,6 +94,8 @@ Mounts the dev tools UI and returns a handle for cleanup.
 
 Call `destroy()` to unmount the toolbar, panel, and state subscription.
 
+---
+
 ## Themes
 
 The following themes are available (provided by `json-edit-react`):
@@ -103,30 +107,45 @@ The following themes are available (provided by `json-edit-react`):
 | `monoDark` | Monochrome dark |
 | `monoLight` | Monochrome light |
 
-## Example
+---
 
-A working example is included in `examples/basic/`. To run it:
+## Roadmap
 
-```bash
-npm install
-npm run dev
-```
+### Done
 
-This builds the core package and starts the Vite dev server for the example app.
+- Real-time state tree inspection
+- Inline editing with instant sync
+- Live observable subscription (zero polling)
+- State export as JSON
+- Multiple color themes (dark/light)
+- Draggable toolbar
+- Configurable panel positioning
+- Read-only mode
+
+### Coming
+
+- Edit history with undo/redo
+- Browser DevTools extension (Chrome / Firefox)
+
+---
 
 ## Development
 
 ```bash
-git clone <repo-url>
+git clone https://github.com/apperside/legend-state-dev-tools.git
 cd legend-state-dev-tools
 npm install
 npm run build   # build the core package
 npm run dev     # build + start example dev server
 ```
 
+A working example is included in `examples/basic/`.
+
+---
+
 ## Architecture
 
-The project is a monorepo with the main package in `packages/core/` and examples in `examples/`.
+Monorepo with the main package in `packages/core/` and examples in `examples/`.
 
 | Module | Path | Role |
 |--------|------|------|
@@ -138,9 +157,17 @@ The project is a monorepo with the main package in `packages/core/` and examples
 | `template-engine` | `packages/core/src/ui/template-engine.ts` | Lightweight HTML templating (Eta) |
 | `styles` | `packages/core/src/styles.css` | Panel and toolbar CSS |
 
+---
+
+## Contributing
+
+Contributions are welcome! Feel free to open an issue or submit a pull request on [GitHub](https://github.com/apperside/legend-state-dev-tools).
+
+---
+
 ## Acknowledgments
 
-A huge thank you to [Carlos](https://github.com/CarlosNZ) for creating [`json-edit-react`](https://github.com/CarlosNZ/json-edit-react) -- the excellent React component that powers the state tree viewer and editor in this project. Without it, these dev tools simply wouldn't exist.
+A huge thank you to [Carlos](https://github.com/CarlosNZ) for creating [`json-edit-react`](https://github.com/CarlosNZ/json-edit-react) — the excellent React component that powers the state tree viewer and editor in this project. Without it, these dev tools simply wouldn't exist.
 
 ## License
 
