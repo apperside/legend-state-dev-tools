@@ -17,7 +17,7 @@ export function createStateBridge(
   // Get initial snapshot
   const getSnapshot = () => {
     try {
-      return JSON.parse(JSON.stringify((observable$ as any).peek()));
+      return JSON.parse(JSON.stringify((observable$ as any).get()));
     } catch {
       return undefined;
     }
