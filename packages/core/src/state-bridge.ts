@@ -17,8 +17,14 @@ export function createStateBridge(
   // Get initial snapshot
   const getSnapshot = () => {
     try {
-      return JSON.parse(JSON.stringify((observable$ as any).get()));
-    } catch {
+      const raw = (observable$ as any).get();
+      console.log('[LSDT] raw get() result:', raw);
+      console.log('[LSDT] raw get() JSON:', JSON.stringify(raw));
+      const parsed = JSON.parse(JSON.stringify(raw));
+      console.log('[LSDT] parsed snapshot:', parsed);
+      return parsed;
+    } catch (e) {
+      console.error('[LSDT] getSnapshot error:', e);
       return undefined;
     }
   };
