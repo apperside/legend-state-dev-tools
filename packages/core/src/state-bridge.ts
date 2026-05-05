@@ -17,14 +17,44 @@ export function createStateBridge(
   // Get initial snapshot
   const getSnapshot = () => {
     try {
-      const raw = (observable$ as any).get();
-      console.log('[LSDT] raw get() result:', raw);
-      console.log('[LSDT] raw get() JSON:', JSON.stringify(raw));
-      const parsed = JSON.parse(JSON.stringify(raw));
-      console.log('[LSDT] parsed snapshot:', parsed);
-      return parsed;
+      // Recursively extract plain values from the observable tree.
+      // We access each level via obs[key] (the child observable proxy) and call peek() on leaf nodes
+      // to get the actual primitive, rather than relying on get() + JSON.stringify which can
+      // fail to serialize primitive-valued observable nodes (they appear as {}).
+      const extractPlainValue = (obs: any): unknown => {
+        if (obs === null || obs === undefined) return obs;
+        if (typeof obs !== 'object' && typeof obs !== 'function') return obs;
+
+        const isObservable =
+          typeof obs.peek === 'function' && typeof obs.onChange === 'function';
+
+        if (isObservable) {
+          const raw = obs.peek();
+          if (raw === null || raw === undefined) return raw;
+          if (typeof raw !== 'object') return raw; // primitive leaf
+          if (Array.isArray(raw)) {
+            return raw.map((_: unknown, i: number) => extractPlainValue(obs[i]));
+          }
+          const result: Record<string, unknown> = {};
+          for (const key of Object.keys(raw)) {
+            result[key] = extractPlainValue(obs[key]);
+          }
+          return result;
+        }
+
+        if (Array.isArray(obs)) {
+          return obs.map((item: unknown) => extractPlainValue(item));
+        }
+        const result: Record<string, unknown> = {};
+        for (const key of Object.keys(obs)) {
+          result[key] = extractPlainValue(obs[key]);
+        }
+        return result;
+      };
+
+      return extractPlainValue(observable$);
     } catch (e) {
-      console.error('[LSDT] getSnapshot error:', e);
+      console.error('[Legend State DevTools] getSnapshot error:', e);
       return undefined;
     }
   };
